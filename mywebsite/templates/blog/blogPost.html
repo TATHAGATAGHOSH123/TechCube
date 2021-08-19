@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Post{% endblock title %}
+
+{% block body %}
+<div class="container">
+<article class="blog-post my-3 align-items-center">
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
+
+        <hr>
+      {% if post.thumbnail %}
+      <p><img src="{{post.thumbnail.url}}" width="100%" height="648px"></p>
+      {% else %}
+      <p></p>
+       {% endif %}
+        <p>{{post.content}}</p>
+
+      </article>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

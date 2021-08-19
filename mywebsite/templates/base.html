@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!--FONT awesome link-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+
+    <style>
+
+.navbar-brand{
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .nav-link{
+          text-align: center;
+          color: white!important;
+        }
+        .nav-item{
+          font-weight: bold;
+        }
+
+        .nav-link:hover{
+
+            color: white;
+        }
+        #searchbtn{
+
+            font-weight: bold;
+            background-color: #18dc29;
+        }
+
+       .active{
+          background-color: limegreen!important;
+          color: black!important;
+          border-radius: 3px;
+        }
+    </style>
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
+  <body>
+<!--Navbar starting-->
+    <nav class="navbar navbar-expand-lg shadow navbar-dark bg-dark" id="navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4" href="/">
+                MyBlog
+<!--                <img src="../images/logo.png" alt="" width="90" height="80" class="d-inline-block align-text-top">-->
+
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav  p-3 ms-auto  mb-2 mb-lg-0">
+
+              <li class="nav-item">
+                <a class="nav-link m-2 {% block homeactive %} {% endblock homeactive %}" aria-current="page" href="/">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link m-2 {% block aboutactive %} {% endblock aboutactive %}" href="/about">About Us</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link m-2 {% block contactactive %} {% endblock contactactive %}" href="/contact">Contact Us</a>
+              </li>
+
+                <li class="nav-item">
+                <a class="nav-link m-2 {% block blogactive %} {% endblock blogactive %}" href="/blog">Blog</a>
+              </li>
+            </ul>
+            <form class="d-flex d-none d-lg-flex" method="get" action="/search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+              <button class="btn text-white" id="searchbtn" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <!--Navbar ending-->
+     {% for message in messages %}
+     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+
+     {% block body %}  {% endblock body %}
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Home{% endblock title %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block body %}
+
+ <main>
+          <section class="py-5 text-center container">
+              <div class="row py-lg-5">
+                  <div class="col-lg-6 col-md-8 mx-auto">
+                      <h1 class="fw-light">Tech Capsules</h1>
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, repudiandae!</p>
+                  </div>
+              </div>
+          </section>
+
+          <div class="album py-5 bg-light">
+              <div class="container">
+                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                      {% for post in allPosts %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            {% if post.thumbnail %}
+                             <p><img src="{{post.thumbnail.url}}" width="100%" height="185px"></p>
+                             {% else %}
+                             <p></p>
+                            {% endif %}
+                          <div class="card-body">
+                              <h4 class="card-title">{{post.title}}</h4>
+                              <smalll><b>By: </b>{{post.author}} <b>Uploaded On: </b>{{post.timeStamp}} </smalll>
+                            <p class="card-text mt-2">{{post.content | truncatechars:130 }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/blog/{{post.slug}}">View</a></button>
+                              </div>
+                              <small class="text-muted">9 mins</small>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                      {% endfor %}
+                  </div>
+
+              </div>
+
+          </div>
+
+      </main>
+
+
+
+
+
+
+{% endblock body %}
