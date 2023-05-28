@@ -2,4 +2,122 @@
 
 {% block title %}About Us{% endblock title %}
 {% block aboutactive %}active{% endblock aboutactive %}
+{% block style %}
 
+    #aboutheading,#teamheading{
+                font-weight: bold!important;
+                text-decoration: underline;
+                color:lime!important;
+    }
+
+    #tatha,#manas,#anuska{
+            font-weight: bold!important;
+            color:limegreen!important;
+            text-decoration: underline;
+
+    }
+
+    body{
+    background-color:#3c005a;
+    }
+
+
+{% endblock style %}
+
+{% block body %}
+
+    <!---ABOUT OUR WEBSITEheading-->
+  <div class="container-fluid shadow ">
+    <div class="row mb-3">
+      <div class="col p-2" style="background-color:black">
+        <h2 id="aboutheading" style="text-align: center;">
+          <strong>ABOUT US</strong>
+        </h2>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!---ABOUT OUR WEBSITEheading-->
+  <!---ABOUT OUR WEBSITE  body-->
+
+  <div class="container mb-3 mt-3 p-4">
+    <div class="row ">
+      <div class="col shadow p-4" style=" background-color:white; border-radius:10px" >
+          <!-- <img src="website1.jpg" alt=""> -->
+
+          <p style="font-family:sans-serif"><strong>TechCube</strong> is a technology blog that focuses on the latest news to the hottest trends and the boldest startups to the strongest titans, we cover everything related to technology in the region. We produce and deliver quality editorial content. Our goal is to provide you with the  information you need to know and never miss an update or a story.
+            Our mission is to bring the latest news about technology, internet business to tech-savvy readers in India. We also cover news about the apps and gadgets that show promise in improving our lives.  We deliver the latest tech news from around the world.
+            We will ensure that any content shared on social media, including FB and Twitter, will reflect positively on the company.
+            </p>
+            <p style="font-family:sans-serif" >We won't use any brand name in a negative context or share anything that is false or defamatory .
+                  We promise not to spam you with push notifications (if we do it will only be if there are major tech stories that need your attention). If you choose to opt  in, we will only send you our newsletter.
+                  All stories published on TechCube will be of the highest quality and every effort will be made to ensure accuracy in content. There may however, be occasions when a story has been edited to better fit a specific format or medium. The information provided here is for general interest and should not be construed as legal or professional advice.
+          </p>
+
+
+      </div>
+    </div>
+  </div>
+  <!---ABOUT OUR WEBSITE  body ending-->
+
+  <!--OUR ABOUT SECTION-->
+<div class="container-fluid shadow">
+  <div class="row">
+    <div class="col p-3 mb-4" style="background-color:black" >
+        <h3 id="teamheading" style="text-align: center;"><strong>TEAM MEMBERS</strong></h3>
+    </div>
+  </div>
+
+</div>
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+
+    <div class="col mt-2 mb-4">
+        <div class="card shadow">
+           <img src="/static/images/Manas2.png" class="rounded " alt="...">
+          <div class="card-body">
+            <h3 id="manas" class="text-center">Manas Ghosh</h3>
+
+              <p>Hi, I am <b>Manas Ghosh</b>. I am a computer science undergraduate student currently
+                  in my 7th semester. Now, I am putting my skills in web development to the test and have a good command of HTML5, CSS3, Django. I thrive on learning any new programming language or framework,
+                  and I have also worked in Bootstrap.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="col mt-2 mb-2">
+        <div class="card shadow">
+           <img src="/static/images/tathagata.png"  class="rounded " alt="TATHAGATA_GHOSH" >
+          <div class="card-body">
+            <h3 id="tatha" class="text-center">Tathagata Ghosh</h3>
+              <p>Hi, I am <b>Tathagata Ghosh</b>. I am in my fourth year of completing mine under graduation degree. I have a good grip on front-end technologies like HTML, CSS, Bootstrap5, and also I have used Django as a backend technology. Currently, my main focus is on developing front-end and styling of the website.
+            </p>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="col mt-2 mb-2">
+        <div class="card shadow">
+           <img src="/static/images/anuska.png" class="rounded " alt="anuska">
+          <div class="card-body pb-0 my-3">
+            <h3 id="anuska" class="text-center">Anuska Mondal</h3>
+              <p>Hi, I am <b>Anuska Mondal</b>. I am a fourth-year undergraduate student pursuing my B.Tech in Computer Science. Currently, I am trying my hands in web development and have a good grip on HTML5, CSS3, bootstrap5, and have knowledge about Django. I like to analyze and write the code in a way that will help me on my everyday task.
+                </p>
+            </div>
+          </div>
+        </div>
+
+
+  </div>
+</div>
+<!--OUR ABOUT SECTIOn-->
+
+
+{% endblock body %}

@@ -13,52 +13,52 @@
 
 
     <style>
-
-.navbar-brand{
+        .navbar-brand{
             font-size: 2rem;
             font-weight: bold;
-        }
+          }
         .nav-link{
           text-align: center;
           color: white!important;
-        }
+          }
         .nav-item{
           font-weight: bold;
-        }
-
+          }
         .nav-link:hover{
 
             color: white;
-        }
-        #searchbtn{
+          }
+        #searchbtn,#loginbtn,#signupbtn,#dropdownMenuButton1,#explore,#knowmore,#recent,#signupsubmit,#loginsubmit{
 
             font-weight: bold;
             background-color: #18dc29;
-        }
+            background-image: -webkit-linear-gradient(hsl(120, 91%, 49%),hsl(120, 96%, 30%));
+          }
 
        .active{
           background-color: limegreen!important;
           color: black!important;
           border-radius: 3px;
         }
+        {% block style%}{%endblock style%}
     </style>
     <title>{% block title %} {% endblock title %}</title>
   </head>
   <body>
 <!--Navbar starting-->
+<header class="sticky-top">
     <nav class="navbar navbar-expand-lg shadow navbar-dark bg-dark" id="navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand ms-4" href="/">
-                MyBlog
-<!--                <img src="../images/logo.png" alt="" width="90" height="80" class="d-inline-block align-text-top">-->
+      <div class="container-fluid">
+        <a class="navbar-brand ms-4" href="/">
+          <img src="/static/images/techcube.png" alt="image here" class="mb-4 mt-3" width="150">
 
-            </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav  p-3 ms-auto  mb-2 mb-lg-0">
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav  p-3 ms-auto  mb-2 mb-lg-0">
 
               <li class="nav-item">
                 <a class="nav-link m-2 {% block homeactive %} {% endblock homeactive %}" aria-current="page" href="/">Home</a>
@@ -75,32 +75,223 @@
                 <li class="nav-item">
                 <a class="nav-link m-2 {% block blogactive %} {% endblock blogactive %}" href="/blog">Blog</a>
               </li>
-            </ul>
-            <form class="d-flex d-none d-lg-flex" method="get" action="/search">
+        </ul>
+        <form class="d-flex d-none d-lg-flex" method="get" action="/search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
               <button class="btn text-white" id="searchbtn" type="submit"><i class="fa fa-search"></i></button>
-            </form>
-          </div>
+        </form>
+
+        {% if user.is_authenticated %}
+
+        <div class="dropdown ms-2">
+                  <div class="btn btn-secondary dropdown-toggle"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                      Welcome {{request.user}}
+                  </div>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                  </ul>
         </div>
-      </nav>
+
+        {% else %}
+        <button type="button" class="btn text-white ms-2" id="loginbtn" data-bs-toggle="modal" data-bs-target="#login">
+          Login
+        </button>
+        <button type="button" class="btn text-white ms-2" id="signupbtn" data-bs-toggle="modal" data-bs-target="#signup">
+          SignUp
+        </button>
+              {% endif %}
+
+      </div>
+      </div>
+    </nav>
+    </header>
+
     <!--Navbar ending-->
      {% for message in messages %}
-     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+     <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert">
         <strong>Message:</strong> {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
 
-
-     {% block body %}  {% endblock body %}
-
+<!-- Button trigger modal -->
 
 
+<!-- Modal Signup -->
+<div class="modal fade" id="signup" tabindex="-1" aria-labelledby="signup" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form action="/signup" method="post"> {% csrf_token %}
+          <div class="mb-3">
+            <label for="firstname" class="col-form-label">First Name:</label>
+            <input type="text" required class="form-control" id="firstname" name="firstname">
+          </div>
+
+          <div class="mb-3">
+            <label for="lastname" class="col-form-label">Last Name:</label>
+            <input type="text" required  class="form-control" id="lastname" name="lastname">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email Address:</label>
+            <input type="email" required  class="form-control" id="email" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="col-form-label">Username:</label>
+            <input type="text" required class="form-control" id="username" name="username">
+          </div>
+
+          <div class="mb-3">
+            <label for="pass1" class="col-form-label">Choose a  password:</label>
+            <input type="password" required  class="form-control" id="pass1" name="pass1">
+          </div>
+
+         <div class="mb-3">
+            <label for="pass2" class="col-form-label">Confirm Password:</label>
+            <input type="password" required  class="form-control" id="pass2" name="pass2">
+          </div>
+
+          <div class="modal-footer">
+            {% csrf_token %}
+            <button type="submit" id="signupsubmit" style="color:white" class="btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+
+
+<!-- Modal Login -->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Log In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/login">
+            {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="loginusername" class="col-form-label">Username:</label>
+            <input type="text" class="form-control" id="loginusername" name="loginusername">
+          </div>
+
+          <div class="mb-3">
+            <label for="loginpassword" class="col-form-label">Enter password:</label>
+            <input type="password" class="form-control" id="loginpassword" name="loginpassword">
+          </div>
+
+           <div class="modal-footer">
+            <button type="submit" id="loginsubmit" class="btn">Submit</button>
+           </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% block body %}  {% endblock body %}
+
+
+
+<!--FOOTER starting-->
+<footer class=" page-footer bg-dark text-white pt-3 pb-4 ">
+  <div class="container-fluid text-center text-md-left">
+    <div class="row text-md-left">
+      <div class="col col-md-3 col-lg-3 col-xl-3 mx-auto" id="f-1">
+                    <img src="/static/images/techcube.png" alt="image here" class="mb-4 mt-3" width="200">
+                    <p>TechCube is a technology blog that focuses on the latest news to the hottest trends and the boldest startups to the strongest titans,
+                        we cover everything related to technology in the region.</p>
+      </div>
+
+      <div class="col col-sm-6 col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="f-2">
+        <h3 class="mb-3 font-weight-bold" style="color:lime;">Resources</h3>
+        <hr class="mt-0 mx-auto" style="width:125px;height:2px;color:lime;">
+        <p>
+                        <a href="/" class="text-white" style="text-decoration: none;">Home</a>
+        </p>
+        <p>
+                        <a href="/about" class="text-white" style="text-decoration: none;">About Us</a>
+        </p>
+        <p>
+                        <a href="/contact" class="text-white" style="text-decoration: none;">Contact Us</a>
+        </p>
+        <p>
+                        <a href="/blog" class="text-white" style="text-decoration: none;">Blog</a>
+        </p>
+      </div>
+
+      <div class="col col-md-3 col-lg-2 col-xl-2 mx-auto mt-3" id="f-3">
+        <h3 class="mb-3 font-weight-bold" style="color: lime;">Github Links</h3>
+        <hr class="mt-0 mx-auto" style="width:185px;height:2px;color:lime;">
+        <p><i class="fab fa-github ms-2 me-2"></i><a href="https://github.com/anuskainterns"  style="text-decoration:none;color:white">Anuska</a></p>
+        <p><i class="fab fa-github ms-2 me-2"></i><a href="https://github.com/TATHAGATAGHOSH123"  style="text-decoration:none;color:white">Tathagata</a></p>
+        <p><i class="fab fa-github ms-2 me-2"></i><a href="https://github.com/manasuemk"  style="text-decoration:none;color:white">Manas</a></p>
+      </div>
+
+      <div class="col col-md-4 col-lg-3 col-xl-3 mx-auto mt-3" id="f-4">
+        <h3 class=" mb-3 font-weight-bold"style="color: lime;">Connect With us</h3>
+        <hr class=" mt-0 mx-auto" style="width:185px;height:2px;color:lime;">
+        <p><i class="fas fa-home  me-2"></i>Kolkata,West Bengal</p>
+        <p><i class="fas fa-envelope me-2"></i>ghosht140@gmail.com</p>
+        <p><i class="fas fa-phone me-2"></i>7908310598/9333799704</p>
+
+      </div>
+    </div>
+<!--COPYRIGHT SECTIOn-->
+    <hr class="mb-4">
+    <div class="row ">
+      <div class="col-md-4 col-lg-4">
+                    <p class="">Copyright @2021 All Rights Reserved   </p>
+      </div>
+
+      <div class="col-md-4 col-lg-4">
+        <p class="ms-4">Created By:
+                        <strong style="color: lime;">Anuska Mondal,Manas Ghosh, Tathagata Ghosh</strong>
+        </p>
+      </div>
+
+      <div class="col-md-4 col-lg-4">
+        <div class="text-center text-md-right">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <a href="/" class="btn-floating btn-sm text-white" style="font-size:23px;"><i class="fa fa-home"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="btn-floating btn-sm text-white" style="font-size:23px;"><i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white" style="font-size:23px;"><i class="fab fa-github"></i>
+                  </a>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+   <!--FOOTER ending-->
+{% block js %} {% endblock js %}
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 
   </body>
+
 </html>

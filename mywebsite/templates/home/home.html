@@ -2,3 +2,200 @@
 
 {% block title %}Home{% endblock title %}
 {% block homeactive %}active{% endblock homeactive %}
+{% block js %}
+      <script>
+      let previews=document.getElementsByClassName('preview');
+      Array.from(previews).forEach((element)=>{
+          element.innerHTML=element.innerText;
+      });
+      </script>
+      {% endblock js %}
+{% block body %}
+<!-- Carasouel section -->
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+        <img src="/static/images/car4.png"  class="d-block" width="100%" height="650px" alt="...">
+
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Be a part of  the family.</h1>
+              {% if user.is_authenticated %}
+              <button type="button" class="btn btn-lg btn-primary" id="signupbtn" data-bs-toggle="modal" data-bs-target="#signup" disabled>
+               Welcome!
+              </button>
+              {%else%}
+<!--              <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>-->
+              <button type="button" class="btn btn-lg btn-primary" id="signupbtn" data-bs-toggle="modal" data-bs-target="#signup">
+               Sign Up today
+              </button>
+              {%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active">
+        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+        <img src="/static/images/car1.png" class="d-block" width="100%" height="650px" alt="...">
+
+        <div class="container">
+          <div class="carousel-caption">
+            <h1> Lets Have a Look What's Inside.</h1>
+            <p><a class="btn btn-lg" id="explore" href="/blog">Explore!</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+        <img src="/static/images/car2.png"  class="d-block" width="100%" height="650px" alt="...">
+
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>Get familiar with us.</h1>
+            <p><a class="btn btn-lg btn-primary" id="knowmore" href="/about">Know More</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+        <img src="/static/images/car3.png"  class="d-block" width="100%" height="650px" alt="...">
+
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>what's Recent Nowadays.</h1>
+            <p><a class="btn btn-lg btn-primary" id="recent" href="/blog/{{best.slug}}">Recent Post</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- Carasouel section -->
+  <!--SERVICE SECTION-->
+<div class="container-fluid bg-dark">
+  <div class="row">
+    <div class="col bg-dark">
+      <hr>
+              <h3 id="teamheading" style="text-align: center; color:white;font-weight: 800; font-size:48px"><strong>Features!</strong></h3>
+              <hr>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2">
+
+    <div class="col mt-3">
+        <div class="card shadow">
+          <i class="fas fa-bullhorn fa-3x mx-auto mt-3"></i>
+          <div class="card-body">
+            <h3 id="seo" style="text-align: center;font-weight:800;">Latest Tech Articles</h3>
+            <p>In this fast-moving world to keep up the pace with technologies,
+              tech-business and latest inventions to stay updates delivering
+              through a precise brief and clean article.so,that u do not have
+              make the effort of finding thing related to tech in different places.</p>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="col mt-3">
+        <div class="card shadow">
+          <i class="fas fa-handshake fa-3x mx-auto mt-3"></i>
+          <div class="card-body">
+            <h3 id="contentwriting" style="text-align: center;font-weight:800;">Best Recommendations </h3>
+            <p>This is a all-in-one Solution for the tech-geeks and for a lay man
+                to get lost and mislead in the E-commerce Websites.so to solve
+                this problem we are here to give u top 10 tech according to your
+                budget through our blogs written by experts.</p>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="col mt-3 mb-2">
+        <div class="card shadow">
+           <i class="fas fa-users fa-3x mx-auto mt-3"></i>
+          <div class="card-body pb-0">
+            <h3 id="anuska"style="text-align: center; font-weight:800;">Community</h3>
+                <p>we are here as a family and wanted to grow big to bigger.For that we
+                    have a special section of comment and reply feature and further wanted
+                    to come out a special community section for our members to give them
+                    live support in the near future.So ,let join up here for free.</p>
+            </div>
+          </div>
+        </div>
+
+
+  </div>
+</div>
+<!--service SECTIOn-->
+
+<!--popular post heading-->
+<div class="container-fluid bg-dark">
+    <div class="row">
+      <div class="col bg-dark">
+        <hr>
+                <h3 id="teamheading" style="text-align: center; color:white;font-weight: 800; font-size:48px"><strong>Popular Posts</strong></h3>
+                <hr>
+
+      </div>
+    </div>
+</div>
+<!--popular post heading-->
+
+<!--Popular post section-->
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 m-2">
+     {% for post in posts %}
+
+      <div class="col mt-2">
+          <div class="card shadow">
+
+            {% if post.thumbnail %}
+            <p><a href="/blog/{{post.slug}}"><img src="{{post.thumbnail.url}}" class="rounded" width="100%" height="185px"></a></p>
+            {% else %}
+            <p></p>
+            {%endif%}
+            <div class="card-body">
+              <h3 id="seo" style="text-align: center;">{{post.title}}</h3>
+              <p><div class="preview">{{post.content|safe|truncatechars:130 }}</div></p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+
+
+
+
+    </div>
+  </div>
+
+<!--Popular post section-->
+
+
+
+
+
+
+
+
+
+{% endblock body %}

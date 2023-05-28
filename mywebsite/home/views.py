@@ -1,12 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from  django.http import HttpResponse
 from home.models import Contact
 from django.contrib import  messages
 from blog.models import Post
+from django.contrib.auth.models import User
+from django.contrib.auth  import authenticate,  login, logout
 # Create your views here.
 
 def home(request):
-    return render(request,'home/home.html')
+    posts = Post.objects.order_by('-views')[:3]
+    best=Post.objects.order_by('-timeStamp')[0]
+    context={'posts':posts,'best':best}
+    return render(request,'home/home.html',context)
 
 def about(request):
     return render(request,'home/about.html')
@@ -41,3 +46,57 @@ def search(request):
         messages.warning(request, 'No search results found. Please refine your query.')
     params={'allPosts':allPosts,'query':query}
     return render(request,'home/search.html',params)
+
+def handlesignup(request):
+    if request.method=='POST':
+        firstname=request.POST['firstname']
+        lastname = request.POST['lastname']
+        email = request.POST['email']
+        username=request.POST['username']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+
+        if not username.isalnum():
+            messages.error(request, " User name should only contain letters and numbers")
+            return redirect('home')
+
+        if (pass1 != pass2):
+            messages.error(request, " Passwords do not match")
+            return redirect('home')
+
+        if len(username) > 10:
+            messages.error(request, " Your user name must be under 10 characters")
+            return redirect('home')
+
+        myuser=User.objects.create_user(username, email, pass1)
+        myuser.first_name = firstname
+        myuser.last_name=lastname
+        myuser.save()
+        messages.success(request,"Your account has been successfully created")
+        return redirect('home')
+
+    else:
+        return HttpResponse("Error-404 -not Found")
+
+def handleLogin (request):
+    if request.method == "POST":
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+
+        user=authenticate(username=loginusername, password=loginpassword)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Successfully Logged In")
+            return redirect("home")
+        else:
+            messages.error(request, "Invalid credentials! Please try again")
+            return redirect("home")
+
+    else:
+      return HttpResponse("404- Not found")
+
+
+def handleLogout(request):
+    logout(request)
+    messages.success(request, "Successfully logged out")
+    return redirect('home')

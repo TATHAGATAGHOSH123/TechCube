@@ -1,53 +1,97 @@
 {% extends 'base.html' %}
 
 {% block title %}Blog Home{% endblock title %}
+
+   {% block js %}
+      <script>
+      let previews=document.getElementsByClassName('preview');
+      Array.from(previews).forEach((element)=>{
+          element.innerHTML=element.innerText;
+      });
+      </script>
+      {% endblock js %}
+
+
 {% block blogactive %}active{% endblock blogactive %}
-{% block body %}
+{% block style%}
+
+.btn{
+        background-image: -webkit-linear-gradient(hsl(120, 93%, 40%),hsl(120, 95%, 26%));
+      }
+    .view,.view:hover{
+        text-decoration: none;
+        color: white;
+        font-size:15px;
+        font-weight: bold;
+      }
+    .card-title,#titlecard{
+        font-weight:bold;
+        font-size: 30px;
+        color:limegreen!important;
+         text-decoration:underline;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+
+        }
+    h1{
+        font-weight:bold;
+        font-size:50px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        text-decoration:underline;
+color:#ab0349;
+
+
+        }
+    section{
+        background-color:rgb(207, 201, 201);
+        }
+
+
+        {% endblock style%}
+        {% block body %}
 
  <main>
-          <section class="py-5 text-center container">
-              <div class="row py-lg-5">
-                  <div class="col-lg-6 col-md-8 mx-auto">
-                      <h1 class="fw-light">Tech Capsules</h1>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, repudiandae!</p>
+               <section class="py-4 text-center container-fluid">
+                  <div class="row py-lg-3">
+                      <div class="col-lg-6 col-md-8 mx-auto">
+                          <h1 class="fw-bold" >Tech Capsules</h1>
+                          <p style="font-size:25px;font-family:serif;">| Technology is a useful servant but a dangerous master | </p>
+                      </div>
                   </div>
-              </div>
-          </section>
+              </section>
 
-          <div class="album py-5 bg-light">
-              <div class="container">
-                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                      {% for post in allPosts %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            {% if post.thumbnail %}
-                             <p><img src="{{post.thumbnail.url}}" width="100%" height="185px"></p>
-                             {% else %}
-                             <p></p>
-                            {% endif %}
-                          <div class="card-body">
-                              <h4 class="card-title">{{post.title}}</h4>
-                              <smalll><b>By: </b>{{post.author}} <b>Uploaded On: </b>{{post.timeStamp}} </smalll>
-                            <p class="card-text mt-2">{{post.content | truncatechars:130 }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/blog/{{post.slug}}">View</a></button>
-                              </div>
-                              <small class="text-muted">9 mins</small>
-                            </div>
-                          </div>
-                        </div>
+              <div class="album py-5 bg-dark  border-bottom border-white">
+      <div class="container ">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+              {% for post in allPosts %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    {% if post.thumbnail %}
+                     <p><a href="/blog/{{post.slug}}"><img src="{{post.thumbnail.url}}" width="100%" height="185px">
+                         </a>
+                     </p>
+                     {% else %}
+                     <p></p>
+                    {% endif %}
+                  <div class="card-body">
+                      <h4 class="card-title"><a href="/blog/{{post.slug}}" id="titlecard">{{post.title}}</a></h4>
+                      <smalll><b>By: </b>{{post.author}} <b>Uploaded On: </b>{{post.timeStamp}} </smalll>
+                      <p class="card-text mt-2"><div class="preview">{{post.content|safe|truncatechars:200 }}</div></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary shadow"><a href="/blog/{{post.slug}}" class="view">View</a></button>
+                      </div>
                     </div>
-                      {% endfor %}
                   </div>
-
-              </div>
-
+                </div>
+            </div>
+              {% endfor %}
           </div>
 
-      </main>
+      </div>
 
+  </div>
 
+</main>
 
 
 
