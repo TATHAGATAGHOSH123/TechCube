@@ -1,15 +1,15 @@
 TechCube---A-responsive-blogging-Website-
 - A responsive Full stack Static Website
-- Has functionality of giving the access for different Usage
-- has viewCounter on each posts
-- user can sign-in and comment-reply on each posts
+- Has functionality of giving access to different Usage
+- has a view counter on each post
+- user can sign in and comment-reply on each post
 - Future modifications are coming
 
 
 How to run the files
 - Install Python
 - Install Django
-- Go to the terminal and pip install pillow package
-- Run the Command "python manage.py runserver"
+- Go to the terminal and pip install the pillow package
+- Run the Command "python manage.py run server"
 - Get a link and follow the link to open the website
-- Create admin user and give access to editor and user
+- Create an admin user and give access to the editor and user
